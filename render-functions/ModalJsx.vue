@@ -5,15 +5,18 @@ export default {
         show : {
             type: Boolean,
             default: true
-        },
+        }/* ,
         message : {
             type: String,
             required: true
-        }
+        } */
     },
     render () {
-        return (this.show) ? <div class="modal">
-            <p> {this.message}</p>
+        return (this.show) ? 
+        <div class="modal">
+            <div class="content">
+                {this.$slots.default}
+            </div>
             <button onClick={this.clickOkHandler}>Ok</button>
             <button onClick={this.clickCancelHandler}>Cancelar</button>
         </div> : null
