@@ -31,7 +31,7 @@
       <slot></slot>
     </main>
     <footer-partial></footer-partial>
-    <pm-modal :show="modals.login" @close-modal="closeModal">
+    <pm-modal :show="modals.login" @close-modal="closeModal('login')">
       <h2 class="text-grey-darkest font-semibold text-center mb-6">Welcome to Platzi Rooms</h2>
       <form>
         <div class="mb-4">
@@ -48,6 +48,32 @@
         </div>
         <div class="mb-4">
           <button class="btn-primary mr-3 w-full">Login</button>
+        </div>
+      </form>
+    </pm-modal>
+    <pm-modal :show="modals.register" @close-modal="closeModal('register')">
+      <h2 class="text-grey-darkest font-semibold text-center mb-6">Platzi Rooms Registration</h2>
+      <form>
+        <div class="mb-4">
+          <label class="input_label">Name:</label>
+          <div class="form_field relative">
+            <input type="text" placeholder="YOUR NAME">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="input_label">Email:</label>
+          <div class="form__field relative">
+            <input type="text" placeholder="aruiz@grupooctano.com.mx">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="input_label">Password:</label>
+          <div class="form_field relative">
+            <input type="password" placeholder="******">
+          </div>
+        </div>
+        <div class="mb-4">
+          <button class="btn-primary mr-3 w-full">Register</button>
         </div>
       </form>
     </pm-modal>
@@ -71,9 +97,9 @@ export default {
     PmModal,
   },
   methods: {
-    closeModal() {
+    closeModal(n) {
       this.$store.dispatch('TOGGLE_MODAL_STATE', {
-        name: 'login',
+        name: n,
         value: false,
       });
     },
