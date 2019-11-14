@@ -31,23 +31,35 @@
       <slot></slot>
     </main>
     <footer-partial></footer-partial>
-    <pm-modal :show="true">
+    <pm-modal :show="modals.login" @close-modal="closeModal">
       <h1>Modal</h1>
     </pm-modal>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import HeaderPartial from '@/partials/HeaderPartial.vue';
 import FooterPartial from '@/partials/FooterPartial.vue';
 import PmModal from '@/components/Modal.vue';
 
 export default {
   name: 'DefaultLayout',
+  computed: {
+    ...mapGetters(['modals']),
+  },
   components: {
     HeaderPartial,
     FooterPartial,
     PmModal,
+  },
+  methods: {
+    closeModal() {
+      this.$store.dispatch('TOGGLE_MODAL_STATE', {
+        name: 'login',
+        value: false,
+      });
+    },
   },
 };
 </script>

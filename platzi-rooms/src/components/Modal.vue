@@ -1,34 +1,32 @@
 <script>
 export default {
-    name: 'Modal',
-    props: {
-        show: {
-            type: Boolean,
-            default: false,
-        },
+  name: 'Modal',
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
     },
-    render (h) {
-        return (this.show) ? 
-        <div class="modal-wrapper">
-           <div class="modal">
-            <div class="modal-head text-right pb-2">
-                <a href="#" onClick={onclose}>
-                  <i class="material-icons modal-close-icon">close</i>  
-                </a>
-            </div>
-            <div class="modal-content">
-                { this.$slots.default }
-            </div>
-           </div> 
-        </div> 
-        : null
+  },
+  render() {
+    return (this.show) ? <div class="modal-wrapper">
+      <div class="modal">
+        <div class="modal-head text-right pb-2">
+          <a href="#" onClick={this.onClose}>
+            <i class="material-icons modal-close-icon">close</i>
+          </a>
+        </div>
+        <div class="modal-content">
+            {this.$slots.default}
+        </div>
+      </div>
+    </div> : null;
+  },
+  methods: {
+    onClose() {
+      this.$emit('close-modal');
     },
-    methods: {
-        onClose () {
-            this.$emit('close-modal')
-        }
-    }
-}
+  },
+};
 </script>
 <style scoped>
 .modal {
