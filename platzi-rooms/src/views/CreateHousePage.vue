@@ -16,18 +16,21 @@
       <form>
         <div class="mb-4">
           <label class="input__label">Title</label>
-          <input class="input__field" type="text" placeholder="Bruce Wayne" />
+          <input v-model="publication.title"
+          class="input__field" type="text" placeholder="Bruce Wayne" />
         </div>
         <div class="mb-4">
           <label class="input__label">Description</label>
-          <textarea class="input__field" rows="10" placeholder="Bruce Wayne" />
+          <textarea v-model="publication.description"
+          class="input__field" rows="10" placeholder="Bruce Wayne" />
         </div>
         <div class="mb-4">
           <label class="input__label">Featured Image</label>
-          <input class="input__field" type="text" placeholder="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+          <input v-model="publication.featuredImage" class="input__field" type="text" placeholder="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
         </div>
         <div class="mb-4 text-right">
-          <button class="w-full bg-yellow-dark text-yellow-dark font-semibold py-3 px-6 rounded">
+          <button @clic.prevent="save"
+          class="w-full bg-yellow-dark text-yellow-dark font-semibold py-3 px-6 rounded">
               Publish</button>
         </div>
       </form>
@@ -40,6 +43,27 @@ import PageLayout from '@/layouts/PageLayout.vue';
 
 export default {
   name: 'CreateHousePage',
+  data() {
+    return {
+      publication: {
+        title: '',
+        description: '',
+        featuredImage: '',
+      },
+    };
+  },
+  methods: {
+    save() {
+      const { title, description, featuredImage } = this.publication;
+      const room = {
+        title,
+        description,
+        feature_image: featuredImage,
+        publishedAt: Date.now(),
+      };
+      this.$store.dispatch('CREATE_ROOM', room);
+    },
+  },
   components: {
     PageLayout,
   },
