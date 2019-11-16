@@ -57,7 +57,15 @@ export default new Vuex.Store({
         const rooms = snapshot.val();
         Object.keys(rooms).forEach((roomId) => {
           const room = rooms[roomId];
+          commit('SET_ITEM', { resource: 'rooms', id: roomId, item: room });
         });
+        resolve(Object.values(state.rooms));
+      });
+    }),
+    FETCH_USER: ({ state, commit }, { id }) => new Promise((resolve) => {
+      firebase.database().ref('users').child(id).once('value', (snapshot) => {
+        commit('SET_ITEM', { resource: 'users', id: snapshot.key, item: snapshot.val() });
+        resolve(state.users[id]);
       });
     }),
   },
