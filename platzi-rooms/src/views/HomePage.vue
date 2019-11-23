@@ -28,6 +28,13 @@
             <div class="house__price text-xs">
               <span class="font-bold">${{room.price}} USD</span> per night
             </div>
+            <div class="house__title font-bold mb-2">
+            </div>
+            <div>
+              <ul v-for="service in room.services" :key="service['.key']">
+                <li >{{ services[service].name}}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -49,9 +56,10 @@ export default {
   name: 'HomePage',
   beforeCreate() {
     this.$store.dispatch('FETCH_ROOMS', 12);
+    this.$store.dispatch('FETCH_SERVICES');
   },
   computed: {
-    ...mapGetters(['rooms']),
+    ...mapGetters(['rooms', 'services']),
   },
   components: {
     DefaultLayout,

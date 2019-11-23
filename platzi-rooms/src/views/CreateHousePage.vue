@@ -28,6 +28,14 @@
           <label class="input__label">Featured Image</label>
           <input v-model="publication.featuredImage" class="input__field" type="text" placeholder="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
         </div>
+        <div class="mb-4">
+          <label class="input__label">Servicios:</label>
+          <div v-for="service in services" :key="service['.key']">
+            <input type="checkbox" :name="service.name" :value="service['.key']"
+            v-model="checkedServices">
+            <label for="cbox2">{{service.name}}</label>
+          </div>
+        </div>
         <div class="mb-4 text-right">
           <button @click.prevent="save"
           class="w-full bg-yellow-dark font-semibold py-3 px-6 rounded">
@@ -39,15 +47,18 @@
   </page-layout>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import PageLayout from '@/layouts/PageLayout.vue';
 
 export default {
   name: 'CreateHousePage',
   beforeCreate() {
     this.$store.dispatch('FETCH_ROOMS', 12);
+    this.$store.dispatch('FETCH_SERVICES');
   },
   data() {
     return {
+      checkedServices: [],
       publication: {
         title: '',
         description: '',
@@ -63,12 +74,16 @@ export default {
         description,
         featured_image: featuredImage,
         publishedAt: Date.now(),
+        services: this.checkedServices,
       };
       this.$store.dispatch('CREATE_ROOM', room);
     },
   },
   components: {
     PageLayout,
+  },
+  computed: {
+    ...mapGetters(['services']),
   },
 };
 </script>

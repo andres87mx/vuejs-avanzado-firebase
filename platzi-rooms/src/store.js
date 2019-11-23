@@ -75,11 +75,23 @@ export default new Vuex.Store({
         resolve(state.users[id]);
       });
     }),
+    FETCH_SERVICES: ({ state, commit }) => new Promise((resolve) => {
+      const instance = firebase.database().ref('services');
+      instance.once('value', (snapshot) => {
+        const services = snapshot.val();
+        Object.keys(services).forEach((serviceId) => {
+          const service = services[serviceId];
+          commit('SET_ITEM', { resource: 'services', id: serviceId, item: service });
+        });
+        resolve(Object.values(state.rooms));
+      });
+    }),
   },
   getters: {
     modals: state => state.modals,
     authUser: state => state.users[state.authId],
     rooms: state => state.rooms,
     userRoomsCount: state => id => countObjectProperties(state.users[id].rooms),
+    services: state => state.services,
   },
 });
