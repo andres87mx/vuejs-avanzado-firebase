@@ -56,7 +56,7 @@
     </pm-modal>
     <pm-modal :show="modals.register" @close-modal="closeModal('register')">
       <h2 class="text-grey-darkest font-semibold text-center mb-6">Platzi Rooms Registration</h2>
-      <form>
+      <form class="form" @submit.prevent="registerHandlerSubmit">
         <div class="mb-4">
           <label class="input_label">Name:</label>
           <div class="form_field relative">
@@ -120,6 +120,11 @@ export default {
       this.$store.dispatch('TOGGLE_MODAL_STATE', {
         name: n,
         value: false,
+      });
+    },
+    registerHandlerSubmit() {
+      this.$store.dispatch('CREATE_USER', this.formRegister).then(() => {
+        this.closeModal();
       });
     },
   },
