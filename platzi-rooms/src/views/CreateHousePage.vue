@@ -76,7 +76,9 @@ export default {
         publishedAt: Date.now(),
         services: this.checkedServices,
       };
-      this.$store.dispatch('CREATE_ROOM', room);
+      this.$store.dispatch('CREATE_ROOM', room).then(() => {
+        this.$router.push({ name: 'SearchPage' });
+      });
     },
   },
   components: {
