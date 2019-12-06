@@ -27,3 +27,6 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Configuracion Inicial para trabajar con Firebase Authentication
+Se activa la autenticacion en firebase

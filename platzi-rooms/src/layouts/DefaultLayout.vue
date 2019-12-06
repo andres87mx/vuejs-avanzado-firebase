@@ -60,19 +60,19 @@
         <div class="mb-4">
           <label class="input_label">Name:</label>
           <div class="form_field relative">
-            <input type="text" placeholder="YOUR NAME">
+            <input type="text" placeholder="YOUR NAME" v-model="formRegister.name">
           </div>
         </div>
         <div class="mb-4">
           <label class="input_label">Email:</label>
           <div class="form__field relative">
-            <input type="text" placeholder="aruiz@grupooctano.com.mx">
+            <input type="text" placeholder="aruiz@grupooctano.com.mx" v-model="formRegister.email">
           </div>
         </div>
         <div class="mb-4">
           <label class="input_label">Password:</label>
           <div class="form_field relative">
-            <input type="password" placeholder="******">
+            <input type="password" placeholder="******" v-model="formRegister.password">
           </div>
         </div>
         <div class="mb-4">
@@ -98,6 +98,11 @@ export default {
         email: '',
         password: '',
         rememberMe: false,
+      },
+      formRegister: {
+        email: '',
+        name: '',
+        password: '',
       },
     };
   },
