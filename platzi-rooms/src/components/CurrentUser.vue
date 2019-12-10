@@ -12,7 +12,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'authUser',
-    })
-  }
-}
+    }),
+  },
+};
 </script>
